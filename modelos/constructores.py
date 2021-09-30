@@ -2,6 +2,7 @@ from abc import ABC, abstractmethod
 
 from .heroe import *
 from .fabricas import *
+from .banner import *
 
 class Director:
   __constructor__ = None
@@ -13,6 +14,10 @@ class Director:
     heroe = Heroe()
     heroe.set_sprites(self.__constructor__.get_sprites())
     return heroe
+
+  def get_banner(self):
+    banner = Banner()
+    return banner
 
 
 class Constructor(ABC):
