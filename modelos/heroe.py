@@ -1,5 +1,6 @@
 from pygame import *
 from pygame.sprite import Sprite
+from modelos.gameConfig import *
 
 class Heroe(Sprite):
   instance = None
@@ -14,8 +15,6 @@ class Heroe(Sprite):
     self.sentido = 0
     self.velocidad = 2
     self.cont = 0
-    self.vida = 100
-    self.puntos = 0
 
   def ubicar(self, pos):
     self.rect.x = pos[0]
@@ -45,13 +44,9 @@ class Heroe(Sprite):
       self.image = self.imagenes[self.sentido][self.cont]
       self.cont += 1
       self.cont %= 3
-      self.puntos += 1
 
-      self.rect.top %= 300
-      self.rect.left %= 300
+      self.rect.top %= SCREEN_HEIGHT-60
+      self.rect.left %= SCREEN_WIDTH
 
   def draw(self, screen):
-    fuente = font.Font(None, 20)
-    texto = fuente.render("puntos: " + str(self.puntos), 1, (20,20,50))
     screen.blit(self.image, self.rect)
-    screen.blit(texto, (self.rect.x - 20, self.rect.y -15))
