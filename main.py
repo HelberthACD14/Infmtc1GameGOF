@@ -32,6 +32,7 @@ def game():
   print(zombies)
   jugando = False
   gameOver = False
+  velocidadFinal=1
   while True:
     for event in pygame.event.get():
       if event.type == pygame.QUIT:
@@ -60,6 +61,9 @@ def game():
         heroe.update()
         for i in zombies:
           i.update(heroe.rect.x,heroe.rect.y)
+          if banner.puntos%1000==0:
+            velocidadFinal+=1    
+            i.velocidad=random.randint(0, velocidadFinal)
           collideX = abs(heroe.rect.x - i.rect.x)
           collideY = abs(heroe.rect.y - i.rect.y)
           
@@ -76,7 +80,7 @@ def game():
       screen.blit(img_inicio, (0, 0))
     pygame.display.update()
     pygame.time.delay(10)
-    print(jugando)
+    print(velocidadFinal)
 
 
 if __name__ == '__main__':
