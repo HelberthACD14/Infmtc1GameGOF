@@ -12,14 +12,18 @@ class Banner(Sprite):
 
   def __init__(self):
     Sprite.__init__(self)
-    self.vida = 100
+    self.vida = 1000
     self.puntos = 0
 
+  def zombieBite(self):
+    self.vida -= 1
 
   def update(self):
       self.puntos += 1
 
   def draw(self, screen):
     fuente = font.Font(None, 30)
-    texto = fuente.render("Puntos: " + str(self.puntos), 1, (100,255,255))
-    screen.blit(texto, (SCREEN_WIDTH-140, SCREEN_HEIGHT-20))
+    textoPuntos = fuente.render("Puntos: " + str(self.puntos), 1, (100,255,255))
+    screen.blit(textoPuntos, (SCREEN_WIDTH-140, SCREEN_HEIGHT-20))
+    textoVida = fuente.render("Vida: " + str(self.vida), 1, (255,100,100))
+    screen.blit(textoVida, (0, SCREEN_HEIGHT-20))
