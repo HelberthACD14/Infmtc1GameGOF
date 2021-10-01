@@ -13,12 +13,16 @@ class Heroe(Sprite):
   def __init__(self):
     Sprite.__init__(self)
     self.sentido = 0
-    self.velocidad = 2
+    self.velocidad = 3
     self.cont = 0
 
   def ubicar(self, pos):
     self.rect.x = pos[0]
     self.rect.y = pos[1]
+
+  def get_location(self):
+      cordenadas=[self.rect.x,self.rect.y]
+      return cordenadas
 
   def set_sprites(self, sprites):
     self.imagenes = sprites
@@ -27,12 +31,12 @@ class Heroe(Sprite):
 
   def update(self):
     teclas = key.get_pressed()
+    if teclas[K_RIGHT]:
+          self.rect.left += self.velocidad
+          self.sentido = 0
     if teclas[K_LEFT]:
       self.rect.left -= self.velocidad
       self.sentido = 1
-    if teclas[K_RIGHT]:
-      self.rect.left += self.velocidad
-      self.sentido = 0
     if teclas[K_DOWN]:
       self.rect.top += self.velocidad
       self.sentido = 2
@@ -50,3 +54,5 @@ class Heroe(Sprite):
 
   def draw(self, screen):
     screen.blit(self.image, self.rect)
+
+
