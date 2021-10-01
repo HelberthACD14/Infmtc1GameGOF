@@ -60,8 +60,11 @@ def game():
       #print(cordenadas)
       #zombie1.setHumanoLocation(cordenadas)
       zombie1.update(heroe.rect.x,heroe.rect.y)
+      zombie1.velocidad=4
       zombie2.update(heroe.rect.x,heroe.rect.y)
+      zombie2.velocidad=2
       zombie3.update(heroe.rect.x,heroe.rect.y)
+      zombie3.velocidad=3
       banner.update()
       heroe.draw(screen)
       zombie1.draw(screen)

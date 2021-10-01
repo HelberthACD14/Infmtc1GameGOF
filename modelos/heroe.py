@@ -13,7 +13,7 @@ class Heroe(Sprite):
   def __init__(self):
     Sprite.__init__(self)
     self.sentido = 0
-    self.velocidad = 3
+    self.velocidad = 5
     self.cont = 0
 
   def ubicar(self, pos):
