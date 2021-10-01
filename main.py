@@ -45,6 +45,9 @@ def game():
     if jugando:
       if gameOver:
         screen.blit(img_gameover, (0,0))
+        fuente = font.Font(None, 30)
+        PuntajeFinal = fuente.render("Puntaje Final: " + str(banner.puntos), 1, (255,100,100))
+        screen.blit(PuntajeFinal, (SCREEN_WIDTH/3 + 50, 3*SCREEN_HEIGHT/4))
       else:
         zombiesQ = zombiesI + (banner.puntos // UmbralPuntos)
         if zombiesA != zombiesQ:

@@ -12,7 +12,7 @@ class Banner(Sprite):
 
   def __init__(self):
     Sprite.__init__(self)
-    self.vida = 1000
+    self.vida = 200
     self.puntos = 0
 
   def zombieBite(self):
