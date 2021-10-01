@@ -23,8 +23,10 @@ def game():
   banner = director.get_banner()
   zombie1 = madScientist.get_zombie()
   print(zombie1)
+  zombiesI = 2
+  zombiesA = zombiesI
   zombies = []
-  for i in range(3):
+  for i in range(zombiesA):  
     zombies.append(madScientist.get_zombie())
   print(zombies)
   jugando = False
@@ -39,6 +41,14 @@ def game():
         i.ubicar((random.randint(0, SCREEN_WIDTH),random.randint(0, SCREEN_HEIGHT)))
       jugando = True
     if jugando:
+      zombiesQ = zombiesI + (banner.puntos // 500)
+      print(zombiesQ) 
+      print(banner.puntos)
+      if zombiesA != zombiesQ:
+        zombiesA = zombiesQ
+        zombies.append(madScientist.get_zombie())
+        last_element = zombies[-1]
+        last_element.ubicar((random.randint(0, SCREEN_WIDTH),random.randint(0, SCREEN_HEIGHT)))      
       screen.blit(img_fondo, (0, 0))
       screen.blit(img_banner, (0, SCREEN_HEIGHT-40))
       heroe.update()

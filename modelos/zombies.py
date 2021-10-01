@@ -3,13 +3,14 @@ from copy import copy, deepcopy
 from pygame import sprite
 from pygame.sprite import Sprite
 from modelos.gameConfig import *
+import random
 
 class Zombie(Sprite):
 
     def __init__(self):
         Sprite.__init__(self)
         self.sentido = 0
-        self.velocidad = 2
+        self.velocidad = random.randint(1, 6)
         self.ataque = 25
         self.cont = 0
 
