@@ -3,6 +3,7 @@ from abc import ABC, abstractmethod
 from .heroe import *
 from .fabricas import *
 from .banner import *
+from .zombies import *
 
 class Director:
   __constructor__ = None
@@ -12,12 +13,17 @@ class Director:
 
   def get_heroe(self):
     heroe = Heroe()
-    heroe.set_sprites(self.__constructor__.get_sprites())
+    heroe.set_sprites(self.__constructor__.get_spritesH())
     return heroe
 
   def get_banner(self):
     banner = Banner()
     return banner
+
+  def get_zombie(self):
+    zombie = Zombie()
+    zombie.set_sprites(self.__constructor__.get_spritesZ())
+    return zombie
 
 
 class Constructor(ABC):
@@ -28,9 +34,18 @@ class ConstructorHumanos(Constructor):
   def __init__(self):
     self.fabrica = FabricaHumano()
 
-  def get_sprites(self):
+  def get_spritesH(self):
     return [self.fabrica.crear_derecha(),
             self.fabrica.crear_izquierda(),
             self.fabrica.crear_abajo(),
             self.fabrica.crear_arriba()]
 
+class ConstructorZombies(Constructor):
+  def __init__(self):
+    self.fabrica = FabricaZombie()
+
+  def get_spritesZ(self):
+    return[self.fabrica.crear_derecha(),
+            self.fabrica.crear_izquierda(),
+            self.fabrica.crear_abajo(),
+            self.fabrica.crear_arriba()]

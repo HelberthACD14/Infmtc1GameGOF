@@ -44,3 +44,29 @@ class DerechaHumano(Derecha):
     return [cargar_imagen('imagenes/D1.png'),
             cargar_imagen('imagenes/D2.png'),
             cargar_imagen('imagenes/D3.png')]
+
+
+
+class AbajoZombie(Abajo):
+  def get_sprites(self):
+    return [cargar_imagen('imagenes/ZF1.png'),
+            cargar_imagen('imagenes/ZF2.png'),
+            cargar_imagen('imagenes/ZF3.png')]
+
+class ArribaZombie(Arriba):
+  def get_sprites(self):
+    return [cargar_imagen('imagenes/ZB1.png'),
+            cargar_imagen('imagenes/ZB2.png'),
+            cargar_imagen('imagenes/ZB3.png')]
+
+class IzquierdaZombie(Izquierda):
+  def get_sprites(self):
+    return [cargar_imagen('imagenes/ZI1.png'),
+            cargar_imagen('imagenes/ZI2.png'),
+            cargar_imagen('imagenes/ZI3.png')]
+
+class DerechaZombie(Derecha):
+  def get_sprites(self):
+    return [cargar_imagen('imagenes/ZD1.png'),
+            cargar_imagen('imagenes/ZD2.png'),
+            cargar_imagen('imagenes/ZD3.png')]

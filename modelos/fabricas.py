@@ -34,3 +34,21 @@ class FabricaHumano(FabricaAbstracta):
   def crear_abajo(self):
     producto = AbajoHumano()
     return producto.get_sprites()
+
+class FabricaZombie(FabricaAbstracta):
+  def crear_izquierda(self):
+    producto = IzquierdaZombie()
+    return producto.get_sprites()
+
+  def crear_derecha(self):
+    producto = DerechaZombie()
+    return producto.get_sprites()
+
+  def crear_arriba(self):
+    producto = ArribaZombie()
+    return producto.get_sprites()
+
+  def crear_abajo(self):
+    producto = AbajoZombie()
+    return producto.get_sprites()
+
