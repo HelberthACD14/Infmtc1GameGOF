@@ -4,6 +4,7 @@ from modelos.gameConfig import *
 
 class Banner(Sprite):
   instance = None
+  vida=0
 
   def __new__(cls, *arg, **kargs):
     if cls.instance is None:
@@ -15,11 +16,12 @@ class Banner(Sprite):
     self.vida = 200
     self.puntos = 0
 
+  def update(self):
+      self.puntos += 1
+
   def zombieBite(self):
     self.vida -= 1
 
-  def update(self):
-      self.puntos += 1
 
   def draw(self, screen):
     fuente = font.Font(None, 30)
