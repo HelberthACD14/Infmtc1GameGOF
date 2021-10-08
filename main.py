@@ -5,18 +5,15 @@ from modelos.util import cargar_imagen
 from modelos.constructores import *
 from modelos.gameConfig import *
 import random
+from modelos.observador import *
+
 
 def game():
   pygame.init()
   director = Director()
-  zombieDirector = Director()
+  publisher = Publisher();
+  
   director.set_constructor(ConstructorHumanos())
-  zombieDirector.set_constructor(ConstructorZombiez())
-  
-  
-  
-  
-  
   
   img_inicio = cargar_imagen(ImagenCarga)
   img_fondo = cargar_imagen('imagenes/fondo.jpg')
@@ -25,11 +22,20 @@ def game():
 
   pygame.mouse.set_visible(False)
 
-  heroe  = director.get_heroe()
+  
   banner = director.get_banner()
-  zombie1 = zombieDirector.get_zombie()
-  zombie2 = zombieDirector.get_zombie()
-  zombie3 = zombieDirector.get_zombie()
+  heroe = director.get_heroe()
+  liveHeroe= heroe.live
+  subcriptor = Subscriber(heroe)
+  publisher.register(subcriptor)
+  
+  director.set_constructor(ConstructorZombiez())
+  
+  zombie1 = director.get_zombie()
+  zombie2 = director.get_zombie()
+  zombie3 = director.get_zombie()
+  heroeSize=pygame.Rect(heroe.rect.left,heroe.rect.top,25,19)
+  
   
   """random1 = [
               random.randrange(800,600),
@@ -61,15 +67,22 @@ def game():
       #zombie1.setHumanoLocation(cordenadas)
       zombie1.update(heroe.rect.x,heroe.rect.y)
       zombie1.velocidad=4
-      zombie2.update(heroe.rect.x,heroe.rect.y)
-      zombie2.velocidad=2
-      zombie3.update(heroe.rect.x,heroe.rect.y)
-      zombie3.velocidad=3
+      #zombie2.update(heroe.rect.x,heroe.rect.y)
+      #zombie2.velocidad=2
+      #zombie3.update(heroe.rect.x,heroe.rect.y)
+      #zombie3.velocidad=3
       banner.update()
       heroe.draw(screen)
       zombie1.draw(screen)
-      zombie2.draw(screen)
-      zombie3.draw(screen)
+      #zombie2.draw(screen)
+      #zombie3.draw(screen)
+      #Revisamos las colisiones
+      #print (heroe.rect.colliderect(zombie1.rect))
+      if heroe.rect.colliderect(zombie1.rect):
+         heroe.live=heroe.live-1
+         publisher.dispatch(heroe)
+      if heroe.live==0:
+                  
       
       #print (screen)
       #zombie1.draw(screen)
