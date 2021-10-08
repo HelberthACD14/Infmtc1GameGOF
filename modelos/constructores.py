@@ -13,7 +13,7 @@ class Director:
 
   def get_heroe(self):
     heroe = Heroe()
-    heroe.set_sprites(self.__constructor__.get_spritesH())
+    heroe.set_sprites(self.__constructor__.get_sprites())
     return heroe
 
   def get_banner(self):
@@ -22,7 +22,7 @@ class Director:
 
   def get_zombie(self):
     zombie = Zombie()
-    zombie.set_sprites(self.__constructor__.get_spritesZ())
+    zombie.set_sprites(self.__constructor__.get_sprites())
     return zombie
 
 
@@ -34,7 +34,7 @@ class ConstructorHumanos(Constructor):
   def __init__(self):
     self.fabrica = FabricaHumano()
 
-  def get_spritesH(self):
+  def get_sprites(self):
     return [self.fabrica.crear_derecha(),
             self.fabrica.crear_izquierda(),
             self.fabrica.crear_abajo(),
@@ -44,7 +44,7 @@ class ConstructorZombies(Constructor):
   def __init__(self):
     self.fabrica = FabricaZombie()
 
-  def get_spritesZ(self):
+  def get_sprites(self):
     return[self.fabrica.crear_derecha(),
             self.fabrica.crear_izquierda(),
             self.fabrica.crear_abajo(),
