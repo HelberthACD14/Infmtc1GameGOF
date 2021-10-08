@@ -18,6 +18,7 @@ def game():
   img_inicio = cargar_imagen(ImagenCarga)
   img_fondo = cargar_imagen('imagenes/fondo.jpg')
   img_banner = cargar_imagen('imagenes/Banner.png')
+  img_end = cargar_imagen('imagenes/gameover.jpg')
   screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
   pygame.mouse.set_visible(False)
@@ -51,16 +52,24 @@ def game():
         sys.exit()
     teclas = pygame.key.get_pressed()
     if teclas[K_SPACE]:
+      heroe.live=100    
       heroe.ubicar((SCREEN_WIDTH/2,SCREEN_HEIGHT/2))
       zombie1.ubicar((0,SCREEN_HEIGHT/random.randint(1,5)))#divisor= random.randint(1,5)
       zombie2.ubicar((0,SCREEN_HEIGHT/random.randint(1,5)))
       zombie3.ubicar((SCREEN_WIDTH/random.randint(1,5),0))
+      screen.blit(img_inicio, (0, 0))
       
       
       jugando = True
+      gameOver=False
     if jugando:
       screen.blit(img_fondo, (0, 0))
       screen.blit(img_banner, (0, SCREEN_HEIGHT-40))
+      if gameOver==True:
+         screen.blit(img_inicio, (0, 0))
+         
+      
+         #sys.exit()
       heroe.update()
       heroe.get_location()
       #print(cordenadas)
@@ -79,11 +88,23 @@ def game():
       #Revisamos las colisiones
       #print (heroe.rect.colliderect(zombie1.rect))
       if heroe.rect.colliderect(zombie1.rect):
-         heroe.live=heroe.live-1
-         publisher.dispatch(heroe)
-      if heroe.live==0:
-                  
-      
+            if heroe.live>0:
+               heroe.live=heroe.live-1
+         
+      banner.setVida(heroe.live)
+      #Patron Observador
+      publisher.dispatch(heroe)
+
+      if heroe.live<1:
+             gameOver=True
+             jugando=False
+             #heroe.live=100
+      print(banner.puntos%100)       
+      if (banner.puntos%100)==0:
+          zombie1.velocidad=zombie1.velocidad+1
+          
+         #sys.exit()       
+      print(zombie1.velocidad)      
       #print (screen)
       #zombie1.draw(screen)
       #zombie2.draw(screen)
@@ -91,7 +112,7 @@ def game():
     else:
       screen.blit(img_inicio, (0, 0))
     pygame.display.update()
-    pygame.time.delay(20)
+    pygame.time.delay(30)
     #print(jugando)
 
 

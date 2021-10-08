@@ -15,7 +15,7 @@ class Heroe(Sprite):
     self.sentido = 0
     self.velocidad = 5
     self.cont = 0
-    self.live = 1000
+    self.live = 100
 
   def ubicar(self, pos):
     self.rect.x = pos[0]
