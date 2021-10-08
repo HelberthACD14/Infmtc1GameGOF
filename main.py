@@ -42,15 +42,17 @@ def game():
               random.randrange(800,600),
               random.randrange(800,600)
             ]"""
-  
+  print(1000%1000)
   pos2 =[random.randint(SCREEN_HEIGHT,SCREEN_WIDTH),random.randint(SCREEN_HEIGHT,SCREEN_WIDTH)]
   pos3 =[random.randint(SCREEN_HEIGHT,SCREEN_WIDTH),random.randint(SCREEN_HEIGHT,SCREEN_WIDTH)]
   jugando = False
+  velocidadZombie=1
   while True:
     for event in pygame.event.get():
       if event.type == pygame.QUIT:
         sys.exit()
     teclas = pygame.key.get_pressed()
+
     if teclas[K_SPACE]:
       heroe.live=100    
       heroe.ubicar((SCREEN_WIDTH/2,SCREEN_HEIGHT/2))
@@ -75,7 +77,7 @@ def game():
       #print(cordenadas)
       #zombie1.setHumanoLocation(cordenadas)
       zombie1.update(heroe.rect.x,heroe.rect.y)
-      zombie1.velocidad=4
+      #zombie1.velocidad=velocidadZombie
       #zombie2.update(heroe.rect.x,heroe.rect.y)
       #zombie2.velocidad=2
       #zombie3.update(heroe.rect.x,heroe.rect.y)
@@ -91,24 +93,18 @@ def game():
             if heroe.live>0:
                heroe.live=heroe.live-1
          
-      banner.setVida(heroe.live)
+      #banner.setVida(heroe.live)
       #Patron Observador
-      publisher.dispatch(heroe)
-
+      publisher.dispatch(heroe,banner,screen,zombie1)
+      
       if heroe.live<1:
              gameOver=True
              jugando=False
              #heroe.live=100
-      print(banner.puntos%100)       
-      if (banner.puntos%100)==0:
-          zombie1.velocidad=zombie1.velocidad+1
-          
-         #sys.exit()       
-      print(zombie1.velocidad)      
-      #print (screen)
+      
       #zombie1.draw(screen)
       #zombie2.draw(screen)
-      banner.draw(screen)
+      #banner.draw(screen)
     else:
       screen.blit(img_inicio, (0, 0))
     pygame.display.update()
